@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock title %}</title>
+</head>
+<body bgcolor="#dcdcdc">
+{% include 'nav.html' %}
+<br>
+<div class="parallax-container valign-wrapper">
+{% block banner %}
+{% endblock %}
+</div>
+
+
+    <div class="container">
+        <table>
+        <tr>
+            <td>{% block sidebar %}{% endblock %}</td>
+        <td>{% block content %}
+        {% endblock %}</td>
+        </tr>
+        </table>
+    </div>
+{% block script%}
+{% endblock %}
+</body>
+</html>

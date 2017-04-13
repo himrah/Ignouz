@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+{% include 'nav.html'%}
+    <div class="container">
+        <div class="row">
+        <div class="col s12 m4 l7">
+            {% for i in info %}
+            <h5>{{ i }}</h5>
+            {% endfor %}
+            <h5 id="h5">Total Percentage : </h5>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col s9 m4 l5">
+                <table class="responsive-table">
+                    {% for i in mark %}
+                        <tr>
+                        {% for j in i %}
+                            {% if j == "Not Completed" %}
+                            <td align="center" class="num" style="color: red">{{ j }}</td>
+                            {% elif j == "Completed" %}
+                            <td align="center" class="num" style="color: Green">{{ j }}</td>
+                            {% else %}
+                             <td align="center" class="num">{{ j }}</td>
+
+                            {% endif%}
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+/*var input = $('.num');
+    for(var i=0;i<input.length;i++){
+        console.log($(input[i]).val())
+    }
+    $('.num').each(function () {
+        console.log(this.value)
+    })*/
+    $(".num").each(function() {
+        console.log($(this).text().serialize());
+    });
+    //console.log($('.num').serialize())
+    console.log("righ")
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load materializecss %}
+{% block content %}
+{% if form.errors %}
+    {{ form.error_messages }}
+    <h2>invalid</h2>
+    {% endif %}
+    <form method="POST" action="/auth/">
+    {% csrf_token %}
+    {{ form|materializecss:'validate' }}
+
+    <input type="submit" class="btn" value="login"/>
+</form>
+{% endblock content %}
