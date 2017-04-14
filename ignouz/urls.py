@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^grade',grade,name='grade'),
     url(r'^result',result,name='result'),
     url(r'^accounts/registration/$',registration,name='registration'),
-    url(r'^answer/(?P<pk>.*)/', anss, name='answer'),
+    url(r'^community/(?P<pk>.*)/', anss, name='answer'),
     url(r'^community/',community,name='community'),
 
     url(r'^em',em,name='em')
