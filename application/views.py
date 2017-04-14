@@ -43,8 +43,18 @@ def logout(request):
     return render_to_response('registration/logged_out.html')
 
 
+def anss(request,pk):
+    qs = pk.replace('-',' ')
+    qes=Question.objects.get(qs=qs)
+    ans = qes.answer_set.all()
+    print(pk)
+    return render_to_response('answer.html',{'answer':ans,'question':qes})
+
+
+
 def community(request):
-    return render_to_response('community.html')
+    com = Question.objects.all()
+    return render_to_response('community.html',{'com':com})
 
 def registration(request):
     form=Registrationform(request.POST or None)

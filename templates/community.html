@@ -1,22 +1,37 @@
+{% extends 'base2.html' %}
 {% load staticfiles %}
 {% block title %} Community {% endblock %}
 <link rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}">
 <link rel="stylesheet" href="{% static 'style.css' %}">
+
 {% block banner %}
-    <div class="section no-pad-bot">
+<div class="center parallax-container card-panel">
+    <div class="section no-pad-bot center">
       <div class="container valign">
         <br><br>
-        <h1 class="header center grey-text text-darken-2">Materialize blog theme</h1>
+        <h1 class="header center grey-text text-darken-2">Join Community</h1>
         <div class="row center">
-          <h5 class="header col s12 light grey-text text-darken-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</h5>
+          <h5 class="header col s12 light grey-text text-darken-2">Join ignouz community and ask questions</h5>
         </div>
         <div class="row center">
           <a href="#startPosts" class="btn-floating btn-large waves-effect waves-light grey darken-2 head-link"><i class="fa fa-angle-double-down"></i></a>
         </div>
         <br><br>
       </div>
-    </div>
-    <div class="parallax"><img src="images/main.jpg" alt="Unsplashed background img 2"></div>
+    </div></div>
 {% endblock %}
 {% block content %}
+
+    {% for i in com %}
+        <div class="row">
+        <a href="/answer/{{ i }}/">
+            <div class="col s12 m5 l12 icon-block">
+                <div class="section no-pad-bot card-panel" id="index-banner">
+                        <div class="row">
+                        <h5>{{ i.qs }}</h5>
+                          <br><br>
+                    </div>
+            </div>
+        </a>
+    {% endfor %}
 {% endblock %}

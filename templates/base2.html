@@ -8,15 +8,13 @@
 {% include 'nav.html' %}
 <br>
 
+{% block banner %}
+{% endblock %}
 
-    <div class="container">
-        <table>
-        <tr>
-            <td>{% block sidebar %}{% endblock %}</td>
-        <td>{% block content %}
-        {% endblock %}</td>
-        </tr>
-        </table>
+<div class="container">
+            {% block sidebar %}{% endblock %}
+            {% block content %}
+        {% endblock %}
     </div>
 {% block script%}
 {% endblock %}
