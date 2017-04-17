@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
@@ -44,7 +45,7 @@ class Subject(models.Model):
 class Question(models.Model):
     qs = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now, blank=True)
     is_delete = models.BooleanField(default=False)
     def __str__(self):
         return self.qs.replace(' ','-')
@@ -55,17 +56,17 @@ class Answer(models.Model):
     qes = models.ForeignKey(Question,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     ans = models.TextField()
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now, blank=True)
     is_deleted = models.BooleanField(default=False)
     def __str__(self):
         return (str(self.qes)+" : "+str(self.ans))
 
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    forwhat = models.ForeignKey(Question,on_delete=models.CASCADE)
+    forwhat = models.ForeignKey(Answer,on_delete=models.CASCADE)
     comment = models.TextField()
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now, blank=True)
     is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.qes
+        return str(self.forwhat)+' : '+str(self.comment)

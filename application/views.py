@@ -47,10 +47,29 @@ def anss(request,pk):
     qs = pk.replace('-',' ')
     qes=Question.objects.get(qs=qs)
     ans = qes.answer_set.all()
-    print(pk)
-    return render_to_response('answer.html',{'answer':ans,'question':qes})
+    comment = Comment.objects.all()
+    #print(pk)
+    return render_to_response('answer.html',{'answer':ans,'question':qes,'comments':comment})
 
+def answer(request):
+    #if request.method == 'POST':
+        #an = request.POST.get('answers')
+    return render_to_response('give_answer.html')
 
+def post_comment(request,pk):
+    if request.method=='POST':
+        form = comment_form(request.POST)
+        if form.is_valid():
+            task=form.save(commit=False)
+            ans = Answer.objects.get(id=pk)
+            task.forwhat_id = ans
+            task.user_id = request.user.id
+            task.save()
+            form.save()
+            return HttpResponse('OK')
+        else:
+            return HttpResponse('NOT')
+        #Comment.objects.create()
 
 def community(request):
     com = Question.objects.all()

@@ -1,45 +1,92 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %} {{ question.qs }} - IGNOUZ{% endblock %}
+
 {% block content %}
     <div class="row">
-        <div class="container">
+        <ldiv class="container" style="position:relative;">
             <div class="row">
-                <div class="col s12 m5 l12 icon-block">
+                <div class="col s12 m12 l12 icon-block">
                     <div class="section no-pad-bot card-panel" id="index-banner">
-                        <table class="bordered">
-                        <tr>
-                            <td>
-                                <h5> {{ question.qs }}</h5>
-                                <i> By {{ question.user }}</i>
-                                <br>
-                                <br>
-                                <b>{{ answer.count }} Answer </b>
-                            </td>
-                        </tr>
-                            {% for i in answer %}
-                        <tr>
-                            <td>
-                            <div style="font-family:'DejaVu Serif Condensed';font-size: 16px;">
+                        <h5> {{ question.qs }}</h5>
+                        <i> By {{ question.user }}</i>
+                        <br>
+                        <br>
+                        <b>{{ answer.count }} Answers </b>
+                        <hr>
+                        {% for i in answer %}
+                            <div class="answer">
                                 <p >{{ i.ans }}</p>
-                            </div>
                             <div class="right" style="font-size: 12px;color: #444444">
                                 <i >Answer by {{ i.user }}</i>
                                 <i> on {{ i.date }}</i>
-
                             </div>
-                                  <br>
-                            </td>
-                        </tr>
-                                {% endfor %}
-                        </table>
-                        <h5>Give your answer</h5>
-                    <br>
-                    <div>
+                            <div class="glyphicon-comment"><br>
+                                <a href="javascript:clicks({{ i.id }})" name="cmt" id="cmt">Add comment</a>
+                                <form id="post-comment">
+                                    {% csrf_token %}
+                                    <div id="comment-form{{ i.id }}" style="display: block;width: 40%">
+                                    </div>
+                                </form>
 
-                    </div>
-                    </div>
+                                <div class="comment-top nslide" id="nlide">
+                                    <div class="comment-para">
+                                        {% for j in comments %}
+                                            {% if j.forwhat_id == i.id %}
+                                                <p>{{ j.comment }} :- {{ j.user }}</p>
+                                                <hr width="100" size=".5px" color="grey" align="left">
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                 </div>
+                            </div>
+                            </div>
+                            <br>
+                            <hr>
+                               {% endfor %}
+                        <h5>Give your answer</h5>
+                        <br>
+                    <div>
                 </div>
             </div>
         </div>
-    </div>
+    </ldiv>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+
+function clicks(e) {
+
+    ht=" <textarea name='area1' cols='40'></textarea><br />"
+
+    html="<input type=text id='cmt_name' placeholder='Enter your Name'>" +
+            "<input type=email id='cmt_email' placeholder='Enter your Email'>" +
+            "<input type=text id='cmt_content' placeholder='Enter Your Comment'> <input type=submit name=post value=post>";
+    ad="#comment-form"+e;
+//    $(ad).css('width: 50%; display: block;');
+
+
+    $(ad).css('width: 50%;');
+    $(ad).html(html).toggle();
+
+
+
+//    $('.comment-top').show("slide", { direction: "down" }, 1000);
+    //$(ad).toggle(html)
+
+    console.log("there");
+    console.log(e)
+}
+$(document).on('submit','#post-comment',function(e){
+    e.preventDefault()
+    $.ajax({
+        type:'POST',
+        url:'community/comment',
+        data:{
+
+        }
+    })
+})
+
+</script>
 {% endblock %}

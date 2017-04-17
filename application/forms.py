@@ -17,6 +17,9 @@ class LoginForm(AuthenticationForm):
         return super(LoginForm,self).clean(*args,**kwargs)
 
 
+class comment_form(forms.ModelForm):
+    class Meta:
+        fields = ['comment']
 
 
 class Registrationform(UserCreationForm):

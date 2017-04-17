@@ -7,16 +7,9 @@
 <body bgcolor="#dcdcdc">
 {% include 'nav.html' %}
 <br>
-
-
     <div class="container">
-        <table>
-        <tr>
-            <td>{% block sidebar %}{% endblock %}</td>
-        <td>{% block content %}
-        {% endblock %}</td>
-        </tr>
-        </table>
+        {% block content %}{% endblock %}
+        {% block sidebar %}{% endblock %}
     </div>
 {% block script%}
 {% endblock %}

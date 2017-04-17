@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^accounts/registration/$',registration,name='registration'),
     url(r'^community/(?P<pk>.*)/', anss, name='answer'),
     url(r'^community/',community,name='community'),
+    url(r'^answer/',answer,name='community'),
 
     url(r'^em',em,name='em')
 

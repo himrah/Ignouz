@@ -5,6 +5,30 @@
   src: local('Material Icons'), local('MaterialIcons-Regular'), url('materialize/font/material-design-icons/Material-Design-Icons.woff2') format('woff2');
 
 }
+
+.topic td{
+  height: 10px
+}
+
+.topic tr{
+  height: 10px
+}
+.answer{
+  margin-left: 10px;
+  font-size: 1.25rem;
+  margin-right: 10px;
+  font-family:'DejaVu Serif Condensed';
+}
+.comment-top{
+  border-left: 2px solid darkgrey;
+}
+
+.comment-para{
+  font-family:Lohit Devanagari;
+  font-size: 15px;
+  margin-left: 30px;
+
+}
 .leftnavigation{
   width: 270px;
   margin-right: 4px;
