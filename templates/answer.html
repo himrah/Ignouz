@@ -24,13 +24,14 @@
                             <div class="glyphicon-comment"><br>
 
 
-                                <a href="javascript:myfunction({{ i.id }})"  name="cmt" id="cmt">Add comment</a>
+                                <a href="javascript:myfunction({{ i.id }})" name="cmt" id="cmt">Comment</a>
                                 <form id="post-comment">
-                                {% csrf_token %}
-                                    <div id="comment-form{{ i.id }}" style="display: block;width: 40%">
+                                <span id="cmt-ids" cmt-id="{{ i.id }}"></span>
+                                    {% csrf_token %}
+                                    <div id="comment-form{{ i.id }}" style="display: none;width:40%">
 
                                     </div>
-                                    <input type="submit" value="post">
+
                                 </form>
 
 
@@ -38,7 +39,7 @@
                                     <div class="comment-para">
                                         {% for j in comments %}
                                             {% if j.forwhat_id == i.id %}
-                                                <p>{{ j.comment }} :- {{ j.user }}</p>
+                                                <p>{{ j.comment }} :- <i style="font-size: 12px;color: #444444">{{ j.user }} on {{ j.date }}</i></p>
                                                 <hr width="100" size=".5px" color="grey" align="left">
                                             {% endif %}
                                         {% endfor %}
@@ -62,20 +63,26 @@
 
 function myfunction(e) {
 
-    ht="<textarea id='cmt-area' class='form-control' name='area1' cols='40'></textarea><br />"
+    ht="<textarea id='cmt-area' class='form-control' name='area1' cols='40' cmt-id='no'></textarea><br /> <input type='submit' value='post'>"
 
-    html="<input type=text id='cmt_name' placeholder='Enter your Name'>" +
-            "<input type=email id='cmt_email' placeholder='Enter your Email'>" +
-            "<input type=text id='cmt_content' placeholder='Enter Your Comment'> <input type=submit name=post value=post>";
     ad="#comment-form"+e;
 //    $(ad).css('width: 50%; display: block;');
 
 
     $(ad).css('width: 50%;');
-    $(ad).html(ht).toggle();
+    $(ad).html(ht);
+    $(ad).toggle(function () {
+        console.log('first')
+    }, function () {
+        //$('#cmt-area').attr('cmt-id','no')
+        //$(this).removeData()
+       //console.log('second')
+    });
+    if( $(ad).attr('ex')!='no')
+        //$('textarea').remove('#cmt-area');
+    //$(ad).show();
 
-    $('#cmt-area').attr('cmt-id',e);
-
+    //$('#cmt-area').attr('cmt-id',e);
 
 //    $('.comment-top').show("slide", { direction: "down" }, 1000);
     //$(ad).toggle(html)
@@ -101,13 +108,23 @@ $(document).on('submit','#post-comment',function(e){
     console.log("skldflksdfj");
     $.ajax({
         type:'POST',
-        url:'/community/comment/'+$('#cmt-area').attr('cmt-id'),
+        url:'/community/comment/s/'+$('#cmt-area').attr('cmt-id'),
         data:{
             comment:$('#cmt-area').val(),
             csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
         },
+        complete:function() {
+            ad='#comment-form'+$('#cmt-area').attr('cmt-id'),
+            $(ad).toggle();
+            console.log(ad);
+        $('#post-comment').css('display','none')
+
+        },
         success:function(e){
-            console.log(e)
+            console.log(e);
+            if(e=='OK') {
+                $('#post-comment').css('display','none')
+            }
         }
 
     })

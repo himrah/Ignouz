@@ -19,6 +19,7 @@ class LoginForm(AuthenticationForm):
 
 class comment_form(forms.ModelForm):
     class Meta:
+        model = Comment
         fields = ['comment']
 
 

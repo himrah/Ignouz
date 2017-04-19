@@ -49,7 +49,7 @@ def anss(request,pk):
     ans = qes.answer_set.all()
     comment = Comment.objects.all()
     #print(pk)
-    return render_to_response('answer.html',{'answer':ans,'question':qes,'comments':comment})
+    return render(request,'answer.html',{'answer':ans,'question':qes,'comments':comment})
 
 def answer(request):
     #if request.method == 'POST':
@@ -57,12 +57,13 @@ def answer(request):
     return render_to_response('give_answer.html')
 
 def post_comment(request,pk):
+    print(pk)
     if request.method=='POST':
         form = comment_form(request.POST)
         if form.is_valid():
             task=form.save(commit=False)
             ans = Answer.objects.get(id=pk)
-            task.forwhat_id = ans
+            task.forwhat_id = ans.id
             task.user_id = request.user.id
             task.save()
             form.save()
