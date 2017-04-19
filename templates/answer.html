@@ -22,12 +22,17 @@
                                 <i> on {{ i.date }}</i>
                             </div>
                             <div class="glyphicon-comment"><br>
-                                <a href="javascript:clicks({{ i.id }})" name="cmt" id="cmt">Add comment</a>
+
+
+                                <a href="javascript:myfunction({{ i.id }})"  name="cmt" id="cmt">Add comment</a>
                                 <form id="post-comment">
-                                    {% csrf_token %}
+                                {% csrf_token %}
                                     <div id="comment-form{{ i.id }}" style="display: block;width: 40%">
+
                                     </div>
+                                    <input type="submit" value="post">
                                 </form>
+
 
                                 <div class="comment-top nslide" id="nlide">
                                     <div class="comment-para">
@@ -55,9 +60,9 @@
 {% block script %}
 <script type="text/javascript">
 
-function clicks(e) {
+function myfunction(e) {
 
-    ht=" <textarea name='area1' cols='40'></textarea><br />"
+    ht="<textarea id='cmt-area' class='form-control' name='area1' cols='40'></textarea><br />"
 
     html="<input type=text id='cmt_name' placeholder='Enter your Name'>" +
             "<input type=email id='cmt_email' placeholder='Enter your Email'>" +
@@ -67,8 +72,9 @@ function clicks(e) {
 
 
     $(ad).css('width: 50%;');
-    $(ad).html(html).toggle();
+    $(ad).html(ht).toggle();
 
+    $('#cmt-area').attr('cmt-id',e);
 
 
 //    $('.comment-top').show("slide", { direction: "down" }, 1000);
@@ -77,14 +83,33 @@ function clicks(e) {
     console.log("there");
     console.log(e)
 }
+/*$('#cmt').click(function(){
+    alert('yess')
+});*/
+
+$(document).ready(function(){
+    function myfunction(e){
+        console.log('ok')
+    }
+    //console.log('hhh')
+});
+
+
+
 $(document).on('submit','#post-comment',function(e){
-    e.preventDefault()
+    e.preventDefault();
+    console.log("skldflksdfj");
     $.ajax({
         type:'POST',
-        url:'community/comment',
+        url:'/community/comment/'+$('#cmt-area').attr('cmt-id'),
         data:{
-
+            comment:$('#cmt-area').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        },
+        success:function(e){
+            console.log(e)
         }
+
     })
 })
 

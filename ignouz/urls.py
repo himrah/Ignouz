@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^auth/$',auth_view,name='auth'),
     url(r'^accounts/logout/$',logout,name='logout'),
     url(r'^grade',grade,name='grade'),
+    url(r'^community/comment/(?P<pk>\d+)',post_comment,name='post_comment'),
     url(r'^result',result,name='result'),
     url(r'^accounts/registration/$',registration,name='registration'),
     url(r'^community/(?P<pk>.*)/', anss, name='answer'),
