@@ -8,16 +8,19 @@
             <div class="row">
                 <div class="col s12 m12 l12 icon-block">
                     <div class="section no-pad-bot card-panel" id="index-banner">
+                    <div class="question">
                         <h5> {{ question.qs }}</h5>
                         <i> By {{ question.user }}</i>
                         <br>
                         <br>
                         <b>{{ answer.count }} Answers </b>
+                    </div>
                         <hr>
+                    <div class="answer-block">
                         {% for i in answer %}
                             <div class="answer">
                                 <p >{{ i.ans }}</p>
-                            <div class="right" style="font-size: 12px;color: #444444">
+                            <div class="right by">
                                 <i >Answer by {{ i.user }}</i>
                                 <i> on {{ i.date }}</i>
                             </div>
@@ -28,18 +31,18 @@
                                 <form id="post-comment">
                                 <span id="cmt-ids" cmt-id="{{ i.id }}"></span>
                                     {% csrf_token %}
-                                    <div id="comment-form{{ i.id }}" style="display: none;width:40%">
+                                    <div id="comment-area" clicks="no">
+                                        <div id="comment-form{{ i.id }}" clicks="no" class="comment-form" style="display: none;width: 40%">
 
+                                        </div>
                                     </div>
-
                                 </form>
-
 
                                 <div class="comment-top nslide" id="nlide">
                                     <div class="comment-para">
                                         {% for j in comments %}
                                             {% if j.forwhat_id == i.id %}
-                                                <p>{{ j.comment }} :- <i style="font-size: 12px;color: #444444">{{ j.user }} on {{ j.date }}</i></p>
+                                                <p>{{ j.comment }} :- <i class="by">{{ j.user }} on {{ j.date }}</i></p>
                                                 <hr width="100" size=".5px" color="grey" align="left">
                                             {% endif %}
                                         {% endfor %}
@@ -52,7 +55,7 @@
                                {% endfor %}
                         <h5>Give your answer</h5>
                         <br>
-                    <div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,7 +66,7 @@
 
 function myfunction(e) {
 
-    ht="<textarea id='cmt-area' class='form-control' name='area1' cols='40' cmt-id='no'></textarea><br /> <input type='submit' value='post'>"
+    ht="<div id='areas'><textarea id='cmt-area' class='form-control' name='area1' cols='40' cmt-id=''></textarea><br /> <input type='submit' class='btn' value='post'></div>"
 
     ad="#comment-form"+e;
 //    $(ad).css('width: 50%; display: block;');
@@ -71,16 +74,22 @@ function myfunction(e) {
 
     $(ad).css('width: 50%;');
     $(ad).html(ht);
-    $(ad).toggle(function () {
-        console.log('first')
-    }, function () {
-        //$('#cmt-area').attr('cmt-id','no')
-        //$(this).removeData()
-       //console.log('second')
-    });
+    $(ad).toggle(200);
     if( $(ad).attr('ex')!='no')
         //$('textarea').remove('#cmt-area');
     //$(ad).show();
+
+    $('#cmt-area').attr('cmt-id',e)
+
+    if($(ad).attr('clicks')=='no'){
+        $(ad).attr('clicks','yes')
+        console.log('yes')
+    }else {
+
+        $(ad).attr('clicks','no')
+        $('div').remove('#areas')
+        console.log('no')
+    }
 
     //$('#cmt-area').attr('cmt-id',e);
 
@@ -93,6 +102,8 @@ function myfunction(e) {
 /*$('#cmt').click(function(){
     alert('yess')
 });*/
+
+
 
 $(document).ready(function(){
     function myfunction(e){
@@ -108,23 +119,32 @@ $(document).on('submit','#post-comment',function(e){
     console.log("skldflksdfj");
     $.ajax({
         type:'POST',
-        url:'/community/comment/s/'+$('#cmt-area').attr('cmt-id'),
+        async: false,
+        url:'/community/comment/'+$('#cmt-area').attr('cmt-id'),
         data:{
             comment:$('#cmt-area').val(),
             csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
         },
         complete:function() {
-            ad='#comment-form'+$('#cmt-area').attr('cmt-id'),
-            $(ad).toggle();
-            console.log(ad);
-        $('#post-comment').css('display','none')
+            da=$('#cmt-area').val();
+            console.log(da);
+            ad='#comment-form'+$('#cmt-area').attr('cmt-id');
+            $(ad).attr('clicks','no');
+            //$('#comment-area').attr('clicks','no')
+            $('div').remove('#areas');
+            //console.log(ad);
+            //$(ad).css('display','none')
 
         },
         success:function(e){
             console.log(e);
             if(e=='OK') {
-                $('#post-comment').css('display','none')
+                console.log(da);
+                $(ad).css('display','none')
+            }else{
+                //console.log(da)
             }
+
         }
 
     })

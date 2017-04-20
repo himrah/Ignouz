@@ -10,6 +10,17 @@
   height: 10px
 }
 
+.by{
+  font-size: 12px;
+  color: #444444;
+}
+.comment-hr{
+    width:20%;
+    size:.5px;
+    color:grey;
+    float:left
+}
+
 .topic tr{
   height: 10px
 }
