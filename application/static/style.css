@@ -5,7 +5,13 @@
   src: local('Material Icons'), local('MaterialIcons-Regular'), url('materialize/font/material-design-icons/Material-Design-Icons.woff2') format('woff2');
 
 }
-
+body{
+  background: #cecece;
+  font-weight: 300;
+  color: #575757;
+  font: 20px / 1.8 Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  height: 36px;
+}
 .topic td{
   height: 10px
 }
@@ -26,8 +32,9 @@
 }
 .answer{
   margin-left: 10px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-right: 10px;
+
   font-family:'DejaVu Serif Condensed';
 }
 .comment-top{

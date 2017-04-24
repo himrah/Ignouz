@@ -69,4 +69,5 @@ class Comment(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.forwhat)+' : '+str(self.comment)
+        return str(self.comment)+' ::::::::::::::: '+str(self.forwhat)
+

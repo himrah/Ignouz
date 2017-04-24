@@ -74,7 +74,7 @@ function myfunction(e) {
 
     $(ad).css('width: 50%;');
     $(ad).html(ht);
-    $(ad).toggle(200);
+    $(ad).toggle(100);
     if( $(ad).attr('ex')!='no')
         //$('textarea').remove('#cmt-area');
     //$(ad).show();
@@ -119,7 +119,6 @@ $(document).on('submit','#post-comment',function(e){
     console.log("skldflksdfj");
     $.ajax({
         type:'POST',
-        async: false,
         url:'/community/comment/'+$('#cmt-area').attr('cmt-id'),
         data:{
             comment:$('#cmt-area').val(),
@@ -131,16 +130,21 @@ $(document).on('submit','#post-comment',function(e){
             ad='#comment-form'+$('#cmt-area').attr('cmt-id');
             $(ad).attr('clicks','no');
             //$('#comment-area').attr('clicks','no')
+            temp=$('#cmt-area').val();
+
             $('div').remove('#areas');
+            l="<p>"+temp+"</p><hr width='100' size='.5px' color='grey' align='left'>";
+            console.log(l);
+            //$('.comment-para').append(l).animate(200);
             //console.log(ad);
-            //$(ad).css('display','none')
+            $(ad).css('display','none')
 
         },
         success:function(e){
             console.log(e);
             if(e=='OK') {
-                console.log(da);
-                $(ad).css('display','none')
+                console.log('done');
+                //$(ad).css('display','none')
             }else{
                 //console.log(da)
             }
