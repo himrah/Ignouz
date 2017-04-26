@@ -18,7 +18,10 @@ def index(request):
 
     return render_to_response('ignou.html',{'user':request.user})
 
-
+def question(request):
+    #q=QOA.objects.all()
+    y = Years.objects.all()
+    return render_to_response('Question_paper.html',{'question':y})
 
 
 def login(request):

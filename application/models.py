@@ -25,11 +25,22 @@ from django.contrib.auth.models import AbstractUser
 #def save_user_profile(sender,instance,created,**kwargs):
 #    instance.profile.save()
 
+class Sessions(models.Model):
+    session = models.CharField(max_length=10)
+    def __str__(self):
+        return self.session
+
+class Years(models.Model):
+    year = models.IntegerField()
+    def __str__(self):
+        return str(self.year)
+
 class QOA(models.Model):
     question = models.TextField()
     ans = models.TextField()
-    year = models.IntegerField()
-    session = models.CharField(max_length=10)
+    code = models.CharField(max_length=10)
+    year = models.ForeignKey(Years,on_delete=models.CASCADE)
+    session = models.ForeignKey(Sessions, on_delete=models.CASCADE)
     def __str__(self):
         return  self.question
 

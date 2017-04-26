@@ -30,7 +30,6 @@ urlpatterns = [
     url(r'^community/(?P<pk>.*)/', anss, name='answer'),
     url(r'^community/',community,name='community'),
     url(r'^answer/',answer,name='community'),
-
+    url(r'^Question_paper/$',question,name='question'),
     url(r'^em',em,name='em')
-
 ]
