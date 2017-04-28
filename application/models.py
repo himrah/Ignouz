@@ -35,21 +35,24 @@ class Years(models.Model):
     def __str__(self):
         return str(self.year)
 
+
+class Subject(models.Model):
+    code = models.CharField(max_length=10)
+    title = models.CharField(max_length=50)
+    #QandA = models.ForeignKey(QOA,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.code
+
 class QOA(models.Model):
     question = models.TextField()
     ans = models.TextField()
-    code = models.CharField(max_length=10)
+    code = models.ForeignKey(Subject,on_delete=models.CASCADE)
     year = models.ForeignKey(Years,on_delete=models.CASCADE)
     session = models.ForeignKey(Sessions, on_delete=models.CASCADE)
     def __str__(self):
         return  self.question
 
-class Subject(models.Model):
-    code = models.CharField(max_length=10)
-    title = models.CharField(max_length=30)
-    QandA = models.ForeignKey(QOA,on_delete=models.CASCADE)
-    def __str__(self):
-        return self.code
+
 
 
 

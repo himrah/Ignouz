@@ -21,6 +21,7 @@ def index(request):
 def question(request):
     #q=QOA.objects.all()
     y = Years.objects.all()
+    s= QOA.objects.all()
     return render_to_response('Question_paper.html',{'question':y})
 
 
@@ -40,6 +41,7 @@ def em(request):
         return HttpResponse("exist")
     else:
         return HttpResponse("Not")
+
 
 def logout(request):
     auth.logout(request)
@@ -174,6 +176,17 @@ def auth_view(request):
 
 def grade(request):
     return render_to_response('grade.html')
+
+
+def code_list(request,year,month):
+    s=Sessions.objects.filter(session=month.capitalize())[0].id
+    l=QOA.objects.filter(year=year,session=s)
+    c=[]
+    #for i in l:
+    #    c.append(i.code.title)
+        #print(i.code)
+    return render_to_response('code.html',{'code':l})
+    #return HttpResponse(set(c))
 
 
 def result(request):

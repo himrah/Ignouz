@@ -1,7 +1,35 @@
 {% extends 'base.html' %}
-{% block content %}
-{% for i in question %}
-    <h5>{{ i }}</h5><br><br>
-{% endfor %}
+{% block title %}Question Papers{% endblock %}
 
+{% block content %}
+        <div class="row center">
+        {% for i in question %}
+            <div class="col s12 m4 l3 icon-block">
+                <div class="section no-pad-bot card-panel" id="index-banner">
+                    <h4 class="header center orange-text">{{ i }}</h4>
+                   <div id="here">
+                <a href="{{ i.id }}/december" >December</a> | <a href="{{ i.id }}/june">June</a>
+                   </div>
+
+                </div>
+
+            </div>
+        {% endfor %}
+        </div>
 {% endblock %}
+{% block script %}
+<script lang="text/javascript">
+function sessiosn(e) {
+
+    content='<p>here</p>';
+    idd='#here'+e;
+    console.log(idd)
+    $(idd).remove('#br')
+    $(idd).html(content)
+    $(idd).toggle(200)
+
+}
+
+</script>
+{% endblock %}
+
