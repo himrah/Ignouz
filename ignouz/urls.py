@@ -31,6 +31,9 @@ urlpatterns = [
     url(r'^community/',community,name='community'),
     url(r'^answer/',answer,name='community'),
     url(r'^question_paper/$',question,name='question'),
-    url(r'^question_paper/(?P<year>\d+)/(?P<month>\w+)/$',code_list,name='code_list'),
+    url(r'^question_paper/(?P<year>\d+)/(?P<month>\d+)/(?P<code>\d+)/$', question_paper, name='ques'),
+    url(r'^question_paper/(?P<year>\d+)/(?P<month>\d+)/$',code_list,name='code_list'),
+
+#    url(r'^question_paper/(?P<year>\d+)/(?P<month>\d+)/(?P<code>\d+)/$',question_paper, name='code_list'),
     url(r'^em',em,name='em')
 ]

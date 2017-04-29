@@ -39,13 +39,18 @@ class Years(models.Model):
 class Subject(models.Model):
     code = models.CharField(max_length=10)
     title = models.CharField(max_length=50)
+    time =models.CharField(max_length=20,blank=True)
+    marks = models.CharField(max_length=20,blank=True)
     #QandA = models.ForeignKey(QOA,on_delete=models.CASCADE)
     def __str__(self):
         return self.code
 
 class QOA(models.Model):
+    q_no = models.CharField(max_length=10,blank=True)
+    sub_q = models.CharField(max_length=3,blank=True)
     question = models.TextField()
     ans = models.TextField()
+    course = models.CharField(max_length=3,blank=True)
     code = models.ForeignKey(Subject,on_delete=models.CASCADE)
     year = models.ForeignKey(Years,on_delete=models.CASCADE)
     session = models.ForeignKey(Sessions, on_delete=models.CASCADE)

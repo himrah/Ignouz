@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col s12 m12 l12 icon-block">
+            <div class="section no-pad-bot card-panel" id="index-banner">
+                <div class="questionBody">
+                    <div class="center">
+                        <h5>{{ q.course }}(Revised)</h5>
+                        <h5>Term End Examination</h5>
+                        <h5>{{ q.session }} , {{ q.year }}</h5>
+                        <br>
+                        <h5>{{ q.code }} : {{ q.code.title }}</h5>
+                    </div>
+                        <div>
+                            <i class="float-left">Time {{ q.code.time }} hours</i>
+                            <i class="right">Maximum Marks : {{ q.code.marks }}</i>
+                        </div>
+                    <hr>
+                    <i>Note : Question number <b>1</b> is <b>compulsory</b>. Answer <b>three</b> question from rest.</i>
+                    <hr>
+                    <br>
+                    <div>
+
+                        {% for i in question %}
+                            <b>{{ i.q_no }} </b><b>{{ i.question }}</b>
+                            <br>
+                            <p><b>Ans.</b> {{ i.ans }}</p>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

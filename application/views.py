@@ -179,15 +179,25 @@ def grade(request):
 
 
 def code_list(request,year,month):
-    s=Sessions.objects.filter(session=month.capitalize())[0].id
-    l=QOA.objects.filter(year=year,session=s)
+    #s=Sessions.objects.filter(session=month.capitalize())[0].id
+    l=QOA.objects.filter(year=year,session=month)
     c=[]
+
     #for i in l:
     #    c.append(i.code.title)
         #print(i.code)
-    return render_to_response('code.html',{'code':l})
+    return render_to_response('code.html',{'c':Subject.objects.all()})
     #return HttpResponse(set(c))
 
+def question_paper(request,year,month,code):
+    q=QOA.objects.filter(code=code,year=year,session=month)
+    context={
+        'question':q,
+        'q':q[0]
+    }
+    return render_to_response('solved_answer.html',context)
+
+    #return HttpResponse("lkhdslkf")
 
 def result(request):
     enrol=request.GET['enrol']
