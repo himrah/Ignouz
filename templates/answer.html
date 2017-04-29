@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block title %} {{ question.qs }} - IGNOUZ{% endblock %}
+<script src="{% static 'js/ckMaterializeOverrides.js' %}"></script>
+<script src="{% static 'lib/codeMirror/xml.js' %}"></script>
+<script src="{% static 'js/materialNote.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/materialNote.css' %}">
+<link rel="stylesheet" href="{% static 'css/codeMirror/codemirror.css' %}">
+<link rel="stylesheet" href="{% static 'css/codeMirror/monokai.css' %}">
 
 {% block content %}
     <div class="row">
@@ -54,6 +60,8 @@
                             <hr>
                                {% endfor %}
                         <h5>Give your answer</h5>
+                    <div class="editor"  id="first">
+                        </div>
                         <br>
                     </div>
                 </div>
@@ -63,6 +71,41 @@
 {% endblock %}
 {% block script %}
 <script type="text/javascript">
+        var toolbar = [
+            ['style', ['style', 'bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            ['fonts', ['fontsize', 'fontname']],
+            ['color', ['color']],
+            ['undo', ['undo', 'redo', 'help']],
+            ['ckMedia', ['ckImageUploader', 'ckVideoEmbeeder']],
+            ['misc', ['link', 'picture', 'table', 'hr', 'codeview', 'fullscreen']],
+            ['para', ['ul', 'ol', 'paragraph', 'leftButton', 'centerButton', 'rightButton', 'justifyButton', 'outdentButton', 'indentButton']],
+            ['height', ['lineheight']],
+        ];
+
+        $('.editor').materialnote({
+            toolbar: toolbar,
+            height: 550,
+            minHeight: 100,
+            defaultBackColor: '#fff'
+        });
+
+        $('.editorAir').materialnote({
+            airMode: true,
+            airPopover: [
+                ['color', ['color']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+            ]
+        });
+
+
+
+
+
+
+
 
 function myfunction(e) {
 
