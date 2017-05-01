@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock title %}</title>
+
 </head>
 <body bgcolor="#dcdcdc">
 {% include 'nav.html' %}
+    {% block statics %}{% endblock %}
 <br>
     <div class="container">
         {% block content %}{% endblock %}

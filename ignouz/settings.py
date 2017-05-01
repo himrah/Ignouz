@@ -38,8 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'application',
+    'django_summernote',
     'materializecssform',
 ]
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'airMode': False,
+
+
+}
+
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

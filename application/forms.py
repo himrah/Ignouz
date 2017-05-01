@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from .models import *
 from django.contrib.auth.models import User
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'username'}))
     password = forms.CharField(label="Password", max_length=30, widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'password','type':'password'}))
@@ -22,6 +23,13 @@ class comment_form(forms.ModelForm):
         model = Comment
         fields = ['comment']
 
+class answerform(forms.Form):
+    ans = forms.CharField(widget=SummernoteWidget())
+class answerforms(forms.ModelForm):
+    class Meta:
+        model = Answer
+        #widgets = SummernoteInplaceWidget
+        fields = ['ans']
 
 class Registrationform(UserCreationForm):
     first_name=forms.CharField(max_length=15)

@@ -49,12 +49,13 @@ def logout(request):
 
 
 def anss(request,pk):
+    form = answerform()
     qs = pk.replace('-',' ')
     qes=Question.objects.get(qs=qs)
     ans = qes.answer_set.all()
     comment = Comment.objects.all()
     #print(pk)
-    return render(request,'answer.html',{'answer':ans,'question':qes,'comments':comment})
+    return render(request,'answer.html',{'answer':ans,'question':qes,'comments':comment,'form':form})
 
 def answer(request):
     #if request.method == 'POST':

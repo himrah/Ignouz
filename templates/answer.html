@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block title %} {{ question.qs }} - IGNOUZ{% endblock %}
-<script src="{% static 'js/ckMaterializeOverrides.js' %}"></script>
-<script src="{% static 'lib/codeMirror/xml.js' %}"></script>
-<script src="{% static 'js/materialNote.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/materialNote.css' %}">
-<link rel="stylesheet" href="{% static 'css/codeMirror/codemirror.css' %}">
-<link rel="stylesheet" href="{% static 'css/codeMirror/monokai.css' %}">
+{% block statics %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+<script src="{% static 'ckeditor/samples/js/sample.js' %}"></script>
+<link rel="stylesheet" href="{% static 'ckeditor/samples/css/samples.css' %}">
+<link rel="stylesheet" href="{% static 'ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css' %}">
+
+{% endblock %}
+{% include 'editor_file.html' %}
 
 {% block content %}
     <div class="row">
@@ -59,9 +61,14 @@
                             <br>
                             <hr>
                                {% endfor %}
-                        <h5>Give your answer</h5>
-                    <div class="editor"  id="first">
-                        </div>
+                            <a id="ans" href="javascript:ed(1)">Give your answer</a>
+                            <div class="editor" id="editor" style="display: none">
+                                {{ form.ans|safe }}<br>
+                                <input type='button' name='post-answer' value='submit'>
+                           </div>
+                            <div class="ans-submit">
+
+                            </div>
                         <br>
                     </div>
                 </div>
@@ -71,7 +78,9 @@
 {% endblock %}
 {% block script %}
 <script type="text/javascript">
-        var toolbar = [
+
+
+/*        var toolbar = [
             ['style', ['style', 'bold', 'italic', 'underline', 'strikethrough', 'clear']],
             ['fonts', ['fontsize', 'fontname']],
             ['color', ['color']],
@@ -82,14 +91,14 @@
             ['height', ['lineheight']],
         ];
 
-        $('.editor').materialnote({
+        /*$('.editor').materialnote({
             toolbar: toolbar,
-            height: 550,
+            height: 150,
             minHeight: 100,
             defaultBackColor: '#fff'
-        });
+        });*/
 
-        $('.editorAir').materialnote({
+/*        $('.editorAir').materialnote({
             airMode: true,
             airPopover: [
                 ['color', ['color']],
@@ -98,15 +107,22 @@
                 ['table', ['table']],
                 ['insert', ['link', 'picture']]
             ]
-        });
+        });*/
 
 
 
 
+//initSample();
+function ed(e) {
+    console.log('kjhkhk')
+    //var ht="<div class='editor' id='first'>";
+    //$('.ditor').html(ht);
+    $('#editor').toggle(200);
 
-
-
-
+    //initSample();
+    //h="<input type='button' name='post-answer' value='submit'>"
+    //$('.ans-submit').html(h)
+}
 function myfunction(e) {
 
     ht="<div id='areas'><textarea id='cmt-area' class='form-control' name='area1' cols='40' cmt-id=''></textarea><br /> <input type='submit' class='btn' value='post'></div>"
