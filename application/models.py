@@ -47,8 +47,8 @@ class Subject(models.Model):
         return self.code
 
 class QOA(models.Model):
-    q_no = models.CharField(max_length=10,blank=True)
-    sub_q = models.CharField(max_length=3,blank=True)
+    q_no = models.CharField(max_length=10, blank=True)
+    sub_q = models.CharField(max_length=3, blank=True)
     question = models.TextField()
     ans = models.TextField()
     course = models.CharField(max_length=3,blank=True)
