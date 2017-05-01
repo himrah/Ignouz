@@ -51,7 +51,7 @@ class QOA(models.Model):
     sub_q = models.CharField(max_length=3, blank=True)
     question = models.TextField()
     ans = models.TextField()
-    course = models.CharField(max_length=3,blank=True)
+    course = models.CharField(max_length=3, blank=True)
     code = models.ForeignKey(Subject,on_delete=models.CASCADE)
     year = models.ForeignKey(Years,on_delete=models.CASCADE)
     session = models.ForeignKey(Sessions, on_delete=models.CASCADE)
