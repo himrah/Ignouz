@@ -62,8 +62,8 @@
                             <hr>
                                {% endfor %}
                             <a id="ans" href="javascript:ed(1)">Give your answer</a>
-                            <div class="editor" id="editor" style="display: none">
-                                {{ form.ans|safe }}<br>
+                            <div class="editor" id="editor" style="display: block">
+                                {{ form.as_ul }}<br>
                                 <input type='button' name='post-answer' value='submit'>
                            </div>
                             <div class="ans-submit">

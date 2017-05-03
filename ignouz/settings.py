@@ -40,14 +40,9 @@ INSTALLED_APPS = [
     'application',
     'django_summernote',
     'materializecssform',
+    'aloha',
+
 ]
-
-SUMMERNOTE_CONFIG = {
-    'iframe': True,
-    'airMode': False,
-
-
-}
 
 
 

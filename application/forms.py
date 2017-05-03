@@ -2,6 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django import forms
 from django.contrib.auth import authenticate
 from .models import *
+from aloha.widgets import AlohaWidget
 from django.contrib.auth.models import User
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 class LoginForm(AuthenticationForm):
@@ -23,13 +24,14 @@ class comment_form(forms.ModelForm):
         model = Comment
         fields = ['comment']
 
-class answerform(forms.Form):
-    ans = forms.CharField(widget=SummernoteWidget())
+#class answerform(forms.Form):
+#    ans = forms.CharField(max_length=20,widget=AlohaWidget)
+
 class answerforms(forms.ModelForm):
     class Meta:
         model = Answer
         #widgets = SummernoteInplaceWidget
-        fields = ['ans']
+        fields = '__all__'
 
 class Registrationform(UserCreationForm):
     first_name=forms.CharField(max_length=15)

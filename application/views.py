@@ -49,7 +49,7 @@ def logout(request):
 
 
 def anss(request,pk):
-    form = answerform()
+    form = answerforms()
     qs = pk.replace('-',' ')
     qes=Question.objects.get(qs=qs)
     ans = qes.answer_set.all()
