@@ -1,3 +1,8 @@
+
+html {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+}
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -13,7 +18,7 @@ body{
   background: #cecece;
   font-weight: 300;
   color: #575757;
-  font: 20px / 1.8 Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  //font: 20px / 1.8 Arial, 'Helvetica Neue', Helvetica, sans-serif;
   height: 36px;
 }
 .topic td{
@@ -36,10 +41,14 @@ body{
 }
 .answer{
   margin-left: 10px;
-  font-size: 1.1rem;
+  //font-size: 1.1rem;
   margin-right: 10px;
-
-  font-family:'DejaVu Serif Condensed';
+}
+h3{
+  font-size: 15px;
+}
+strong{
+  font-weight: 800;
 }
 .comment-top{
   border-left: 2px solid darkgrey;

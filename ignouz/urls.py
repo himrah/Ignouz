@@ -17,8 +17,11 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django_summernote import urls as u
 from application.views import *
+from ckeditor_uploader import urls
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    url(r'^ckeditor/', include(urls)),
     url(r'^summernote/',include(u)),
     url(r'^admin/', admin.site.urls),
     url(r'^$',index,name='Index'),
@@ -27,6 +30,7 @@ urlpatterns = [
     url(r'^accounts/logout/$',logout,name='logout'),
     url(r'^grade',grade,name='grade'),
     url(r'^community/comment/(?P<pk>\d+)',post_comment,name='post_comment'),
+    url(r'^community/answer/(?P<pk>\d+)', ajax_answer, name='ajax_answer'),
     url(r'^result',result,name='result'),
     url(r'^accounts/registration/$',registration,name='registration'),
     url(r'^community/(?P<pk>.*)/', anss, name='answer'),
@@ -37,5 +41,6 @@ urlpatterns = [
     url(r'^question_paper/(?P<year>\d+)/(?P<month>\d+)/$',code_list,name='code_list'),
 
 #    url(r'^question_paper/(?P<year>\d+)/(?P<month>\d+)/(?P<code>\d+)/$',question_paper, name='code_list'),
-    url(r'^em',em,name='em')
+    url(r'^em',em,name='em'),
+    url('^test/',TemplateView.as_view(template_name='test.html'))
 ]

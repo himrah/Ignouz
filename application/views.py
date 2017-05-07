@@ -48,6 +48,22 @@ def logout(request):
     return render_to_response('registration/logged_out.html')
 
 
+def ajax_answer(request,pk):
+    form = answerforms(request.POST)
+    if form.is_valid():
+        print("idddd",pk)
+        task = form.save(commit=False)
+        #qs = p.replace('-',' ')
+        #qes= Question.objects.get(qs=qs).id
+        task.user_id = request.user.id
+        task.qes_id = pk
+        task.save()
+        return HttpResponse('OK')
+    else:
+        return HttpResponse('NOT')
+        #Answer.objects.create(qs=1,user=request.user.id,)
+
+
 def anss(request,pk):
     form = answerforms()
     qs = pk.replace('-',' ')

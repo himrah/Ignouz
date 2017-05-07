@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from .models import *
 from aloha.widgets import AlohaWidget
+from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.models import User
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 class LoginForm(AuthenticationForm):
@@ -28,10 +29,11 @@ class comment_form(forms.ModelForm):
 #    ans = forms.CharField(max_length=20,widget=AlohaWidget)
 
 class answerforms(forms.ModelForm):
+    ans = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Answer
         #widgets = SummernoteInplaceWidget
-        fields = '__all__'
+        fields = ['ans']
 
 class Registrationform(UserCreationForm):
     first_name=forms.CharField(max_length=15)

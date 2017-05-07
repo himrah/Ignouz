@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 #from aloha.fields import HTMLField
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -76,7 +77,7 @@ class Question(models.Model):
 class Answer(models.Model):
     qes = models.ForeignKey(Question,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    ans = models.TextField()
+    ans = RichTextField()
     date = models.DateTimeField(default=datetime.now, blank=True)
     is_deleted = models.BooleanField(default=False)
     def __str__(self):
