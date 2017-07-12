@@ -10,10 +10,22 @@ html {
   src: local('Material Icons'), local('MaterialIcons-Regular'), url('materialize/font/material-design-icons/Material-Design-Icons.woff2') format('woff2');
 
 }
+
+
+
 .questionBody{
   margin-left: 15px;
   margin-right: 15px;
 }
+
+.over {
+
+  all: revert;
+  /*all: initial;
+  * {
+    all: unset;
+  }*/  }
+
 body{
   background: #cecece;
   font-weight: 300;
@@ -39,7 +51,12 @@ body{
 .topic tr{
   height: 10px
 }
+
+h4{
+  font-size: 17px;
+}
 .answer{
+
   margin-left: 10px;
   //font-size: 1.1rem;
   margin-right: 10px;
