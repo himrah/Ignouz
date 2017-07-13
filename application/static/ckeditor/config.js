@@ -32,6 +32,13 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
+	//config.height = '80vh';
+	config.resize('100%','350',true);
+	config.resize_minWidth = 300;
+	config.resize_minHeight = 300;
+	config.resize_maxWidth = 500;
+	config.resize_maxHeight = 500;
+	config.resize_dir = 'both';
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
