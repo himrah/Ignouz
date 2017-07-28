@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<html>
+<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+{% include 'js.html' %}
+
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+<script src="{% static 'ckeditor/samples/js/sample.js' %}"></script>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'ckeditor/samples/css/samples.css' %}">
+<link rel="stylesheet" href="{% static 'ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css' %}">
+
+<body>
+<table class="table">
+          <tr>
+              <th width="30px">Name</th>
+              <th width="30px">Item Name</th>
+              <th width="30px">Item Price</th>
+          </tr>
+
+        <tbody>
+          <tr>
+            <td>Alvin</td>
+            <td>Eclair</td>
+            <td>$0.87</td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+          </tr>
+          <tr>
+            <td>Jonathan</td>
+            <td>Lollipop</td>
+            <td>$7.00</td>
+          </tr>
+        </tbody>
+      </table>
+<h4>Hlksdjfklsadf lksdf</h4>
+</body>
+<!--<style>
+    table,th,td{
+        border: dashed !important;
+        border-width: thin !important;
+        height: auto !important;
+    }
+
+    h4 {
+    font-size: 2rem;
+    line-height: 110%;
+    margin: 1.14rem 0 0.912rem 0;
+}
+</style>-->
+
+
+<div>
+{% for i in answer%}
+<p>{{ i.ans |safe }}</p>
+{% endfor %}
+</div>
+
+
+
+<div class="editor" id="editor">
+    <form id="ans-form" ans_ids="{{ question.id }}">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.ans }}<br>
+        <input type='submit' name='post-answer' value='submit'>
+        <input type="button" class='btn' name='exm' value="submit" id='exm'>
+   </form>
+</div>
+
+
+
+<script type="text/javascript">
+    $('.nostyle').material_select();
+    //var buttons = $('.nostyle');
+    //var styles = {'width': 'auto', 'height': 'auto', 'background': 'none', 'box-shadow': ''};
+    //buttons.css(styles);
+//$(document).ready(function (e) {
+  //  $('table').addClass('table')
+//})
+</script>
+</html>

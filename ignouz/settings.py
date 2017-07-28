@@ -25,11 +25,34 @@ SECRET_KEY = 'wu%x_qapw%df=q%m=+l8e94(k6-p39q1(ar0yux07^&-t!ln-*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+USE_TZ = False
+
 ALLOWED_HOSTS = []
 
 CKEDITOR_UPLOAD_PATH = "upload/"
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 # Application definition
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 'auto',
+        'toolbarCanCollapse': True,
+ """        'toolbarGroups': [
+             { 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] 
+              },
+             
+             ],"""
+             
+
+        'filebrowserWindowHeight': 725,
+        'filebrowserWindowWidth': 940,
+        'maxwidth':600,
+        'width':'auto',
+        'resize_maxWidth' :1000,
+    },
+}
+
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -95,6 +118,8 @@ AUTH_PROFILE_MODULE = 'application.Profile'
 #AUTH_USER_MODEL = 'core.User'
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+
+#USE_TZ = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {

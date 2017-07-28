@@ -64,6 +64,13 @@ def ajax_answer(request,pk):
         #Answer.objects.create(qs=1,user=request.user.id,)
 
 
+def test(request,pk):
+    form = answerforms()
+    qs = pk.replace('-',' ')
+    qes=Question.objects.get(qs=qs)
+    ans = qes.answer_set.all()    
+    return render_to_response('test.html',{'form':form,'answer':ans})
+
 def anss(request,pk):
     form = answerforms()
     qs = pk.replace('-',' ')

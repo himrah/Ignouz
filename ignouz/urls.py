@@ -42,5 +42,6 @@ urlpatterns = [
 
 #    url(r'^question_paper/(?P<year>\d+)/(?P<month>\d+)/(?P<code>\d+)/$',question_paper, name='code_list'),
     url(r'^em',em,name='em'),
-    url('^test/',TemplateView.as_view(template_name='test.html'))
+    #url('^test/',TemplateView.as_view(template_name='test.html'))
+    url(r'^test/(?P<pk>.*)/',test,name='test')
 ]

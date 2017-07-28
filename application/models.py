@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from datetime import datetime
 #from aloha.fields import HTMLField
 from ckeditor.fields import RichTextField
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -78,7 +79,7 @@ class Answer(models.Model):
     qes = models.ForeignKey(Question,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     ans = RichTextField()
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(default=timezone.now(), blank=True)
     is_deleted = models.BooleanField(default=False)
     def __str__(self):
         return (str(self.qes)+" : "+str(self.ans))

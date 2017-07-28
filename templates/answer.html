@@ -3,7 +3,6 @@
 {% block title %} {{ question.qs }} - IGNOUZ{% endblock %}
 {% block statics %}
 <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
-<script src="{% static 'ckeditor/config.js' %}"></script>
 <script src="{% static 'ckeditor/samples/js/sample.js' %}"></script>
 <link rel="stylesheet" href="{% static 'ckeditor/samples/css/samples.css' %}">
 <link rel="stylesheet" href="{% static 'ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css' %}">
@@ -71,9 +70,12 @@
                                         {{ form.media }}
                                         {{ form.ans }}<br>
                                         <input type='submit' name='post-answer' value='submit'>
-
+                                        <input type="button" class='btn' name='exm' value="submit" id='exm'>
                                    </form>
                                 </div>
+                             </div>
+                             <div id="msg">
+                                 
                              </div>
                         <br>
                     </div>
@@ -82,8 +84,12 @@
         </div>
     </ldiv>
     <style>
-/*        h3 {
-            font-size: 2rem;
+
+
+
+/*      h3 {
+            font-size: 24px;
+
             line-height: 110%;
             margin: 1.14rem 0 0.912rem 0;
         }
@@ -92,73 +98,75 @@
             line-height: 110%;
             margin: 1.14rem 0 0.912rem 0;
         }*/
-        .table{
-            border-collapse: collapse;
-            margin: 0;
-            padding: 0;
-            border: 0;
-            outline: 0;
-            font-size: 100%;
-            vertical-align: baseline;
-            background: transparent;
-        }
-        table.table td{
+
+
+        /*table.table td{
         border: dashed !important;
         border-width: thin !important;
-            text-align: center;
+        text-align: center;*/
+        
             /*border: dashed !important;
         border-width: thin !important;
         height: auto !important;*/
-
-        margin: 0;
+        
+        /*
+        width: auto !important;
+        white-space: nowrap;
         padding: 0;
-
+        margin: 0;
         outline: 0;
         font-size: 100%;
         vertical-align: baseline;
-        background: transparent;
-    }
-    code{
-  padding: 2px 4px;
-  font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
-  border-radius: 4px;
-    }
-    pre code {
-        padding: 0;
-      font-size: inherit;
-      color: inherit;
-      white-space: pre-wrap;
-      background-color: transparent;
-      border-radius: 0;
+        background: transparent;*/
     }
 
-    pre {
-  display: block;
-  font-size: 13px;
-  line-height: 1.42857143;
-  color: #333;
-  word-break: break-all;
-  word-wrap: break-word;
-  background-color: #f5f5f5;
-  margin-left: 15px;
-  margin-right: 15px;
-}
-    .giveyouranswer{
-        margin-left: 15px;
-        display: block;
-        margin-right: 15px;
-    }
-    h1{
-        font-size: 2em;
-    }
-        h2 { font-size: 1.5em; }
-    h3 { font-size: 1.17em; }
-    h4 { font-size: 1.12em; }
-    h5 { font-size: .83em; }
-    h6 { font-size: .75em; }
+    .table{
+        border-spacing: 0;
+        background-color: transparent;
+        border-collapse: collapse !important;
+        width: 100% !important;
+        max-width: 100%;
+        margin-bottom: 20px;
 
+    }
+
+table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    width: auto!important;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+
+
+
+
+        .giveyouranswer{
+            margin-left: 15px;
+            display: block;
+            margin-right: 15px;
+        }
+        h1{
+            font-size: 2em; !important;
+        }
+            h2 { font-size: 1.5em;  !important;}
+        h3 { font-size: 1.17em;  !important; }
+        h4 { font-size: 1.12em;  !important;}
+        h5 { font-size: .83em;  !important;}
+        h6 { font-size: .75em;  !important;}
+
+        blockquote{
+            font-style: italic;
+            font-family: Georgia, Times, "Times New Roman", serif;
+            padding: 2px 0;
+            border-style: solid;
+
+            border-width: 0;
+            padding-left: 1.5rem;
+            border-left: 5px solid #ccc;
+        }
+
+
+    
 
 
     </style>
@@ -172,6 +180,16 @@
 <script type="text/javascript">
 
 
+$(document).on('click','#exm',function(e){
+    //$('.editor').css('display: none;')
+    $('#editor').toggle(200);
+    $('#msg').html('<i>Thanks for your contribute</i>')
+})
+
+//$('.table').removeAttr("style")
+$('.table').attr('style','');
+$('.table').css('width', 'none');
+console.log($('.table').val())
 
 $(document).on('submit','#ans-form',function (e) {
     console.log('sdf '+$('#ans-form').attr('ans_ids')),
@@ -188,6 +206,7 @@ $(document).on('submit','#ans-form',function (e) {
         success:function (e) {
             if(e=='OK') {
                 console.log('success')
+                //$('.editor').css('display: block;');
             }
             else if(e=='NOT'){
                 console.log('Not')
@@ -258,7 +277,9 @@ $(document).ready(function(){
     $('table').addClass('table')
     //console.log('hhh')
 });
-
+$(document).ready(function(){
+    $('.table').removeAttr('style')
+})
 
 
 $(document).on('submit','#post-comment',function(e){
@@ -292,6 +313,7 @@ $(document).on('submit','#post-comment',function(e){
             if(e=='OK') {
                 console.log('done');
                 //$(ad).css('display','none')
+
             }else{
                 //console.log(da)
             }
